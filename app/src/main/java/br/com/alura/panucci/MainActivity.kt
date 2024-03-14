@@ -27,15 +27,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val initialScreen = "Destaques"
-            val screens = remember {
-                mutableStateListOf(initialScreen)
-            }
-            Log.i("MainActivity", "onCreate: screens ${screens.toList()}")
-            val currentScreen = screens.last()
-            BackHandler(screens.size > 1) {
-                screens.removeLast()
-            }
+            val currentScreen = ""
             PanucciTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -49,32 +41,9 @@ class MainActivity : ComponentActivity() {
                         bottomAppBarItemSelected = selectedItem ?: bottomAppBarItems.first(),
                         onBottomAppBarItemSelectedChange = {
                             selectedItem = it
-                            screens.add(it.label)
-                        },
-                        onFabClick = {
-                            screens.add("Pedido")
-                        }) {
-                        when (currentScreen) {
-                            "Destaques" -> HighlightsListScreen(
-                                products = sampleProducts,
-                                onOrderClick = {
-                                    screens.add("Pedido")
-                                },
-                                onProductClick = {
-                                    screens.add("DetalhesProduto")
-                                }
-                            )
-                            "Menu" -> MenuListScreen(
-                                products = sampleProducts
-                            )
-                            "Bebidas" -> DrinksListScreen(
-                                products = sampleProducts + sampleProducts
-                            )
-                            "DetalhesProduto" -> ProductDetailsScreen(
-                                product = sampleProductWithImage
-                            )
-                            "Pedido" -> CheckoutScreen(products = sampleProducts)
-                        }
+                        }, onFabClick = { }){
+                    /*content Scope do PanucciApp*/
+                        // TODO implementar o navHost
                     }
                 }
             }
