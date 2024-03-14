@@ -32,6 +32,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             val currentScreen = ""
             val navController = rememberNavController()
+            //Cuidados a serem tomados:
+            // As navegações devem ser feitas fora do escopo de Composição
+            // As rotas devem ser criadas fora do escopo de Composição
+            // Precisamos destes cuidados, principalmente ao usar o LaunchedEffect, para que o app não entre em loop de renderizacão
             PanucciTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
