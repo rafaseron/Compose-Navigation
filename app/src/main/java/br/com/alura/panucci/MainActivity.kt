@@ -33,12 +33,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var selectedItem by remember(currentScreen) {
-                        val item = bottomAppBarItems.find { currentScreen == it.label }
+                    var selectedItem by remember {
+                        val item = bottomAppBarItems.first()
                         mutableStateOf(item)
                     }
                     PanucciApp(
-                        bottomAppBarItemSelected = selectedItem ?: bottomAppBarItems.first(),
+                        bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
                             selectedItem = it
                         }, onFabClick = { }){
