@@ -14,6 +14,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.sampledata.sampleProductWithImage
 import br.com.alura.panucci.sampledata.sampleProducts
@@ -28,6 +31,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val currentScreen = ""
+            val navController = rememberNavController()
             PanucciTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -44,6 +48,27 @@ class MainActivity : ComponentActivity() {
                         }, onFabClick = { }){
                     /*content Scope do PanucciApp*/
                         // TODO implementar o navHost
+                        NavHost(navController = navController, startDestination = "destaques") {
+                            composable(route = "destaques") {
+                                HighlightsListScreen(products = sampleProducts)
+                            }
+                            composable(route = "checkout") {
+                                CheckoutScreen()
+                            }
+
+                            composable(route = "menu") {
+                                MenuListScreen()
+                            }
+
+                            composable(route = "bebidas") {
+                                DrinksListScreen()
+                            }
+                            composable(route = "productDetail") {
+                                ProductDetailsScreen(product = sampleProductWithImage)
+                            }
+                        }
+
+
                     }
                 }
             }
