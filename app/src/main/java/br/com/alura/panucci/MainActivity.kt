@@ -53,15 +53,15 @@ class MainActivity : ComponentActivity() {
                                 HighlightsListScreen(products = sampleProducts)
                             }
                             composable(route = "checkout") {
-                                CheckoutScreen()
+                                CheckoutScreen(products = sampleProducts)
                             }
 
                             composable(route = "menu") {
-                                MenuListScreen()
+                                MenuListScreen(products = sampleProducts)
                             }
 
                             composable(route = "bebidas") {
-                                DrinksListScreen()
+                                DrinksListScreen(products = sampleProducts)
                             }
                             composable(route = "productDetail") {
                                 ProductDetailsScreen(product = sampleProductWithImage)
