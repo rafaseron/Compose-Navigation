@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
                         bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
                             selectedItem = it
-                        }, onFabClick = { }){
+                        }, onFabClick = { navController.navigate("checkout") }) {
                     /*content Scope do PanucciApp*/
                         // TODO implementar o navHost
                         NavHost(navController = navController, startDestination = "destaques") {
