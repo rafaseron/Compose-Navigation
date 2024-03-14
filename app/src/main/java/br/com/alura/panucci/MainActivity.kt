@@ -50,7 +50,8 @@ class MainActivity : ComponentActivity() {
                         // TODO implementar o navHost
                         NavHost(navController = navController, startDestination = "destaques") {
                             composable(route = "destaques") {
-                                HighlightsListScreen(products = sampleProducts)
+                                HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate("checkout") },
+                                    onProductClick = { navController.navigate("productDetail") })
                             }
                             composable(route = "checkout") {
                                 CheckoutScreen(products = sampleProducts)
