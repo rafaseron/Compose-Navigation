@@ -52,6 +52,18 @@ class MainActivity : ComponentActivity() {
                             composable(route = "destaques") {
                                 HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate("checkout") },
                                     onProductClick = { navController.navigate("productDetail") })
+
+                                /*LAUNCHED EFFECT SERVE PARA NAVEGAR PARA UMA NOVA TELA, tanto apos certo periodo de tempo,
+                                quanto por base de uma condição ou evento
+                                 */
+
+                                //LaunchedEffect(Unit, block = {})
+                                // ou
+                                //LaunchedEffect(Unit){  }
+
+                                // Exemplo de uso:
+                                //LaunchedEffect(Unit, block = { navController.navigate(route = "checkout") delay(3000L) })
+
                             }
                             composable(route = "checkout") {
                                 CheckoutScreen(products = sampleProducts)
