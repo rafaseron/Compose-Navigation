@@ -66,6 +66,11 @@ class MainActivity : ComponentActivity() {
                             selectedItem = navItem
 
                             routeFlow(navItem)
+                            //TAMBEM DA PRA FAZER COMO:
+                            // navController.navigate(route = navItem.label)
+                            /* lembrando que então o Label da ListOf<BottomAppBarItem> e as String das route (rotas do navHost)
+                            devem ter o mesmo valor (se "Destaques" for com o D maiusculo, os dois devem seguir o mesmo padrao
+                             */
                         }, onFabClick = { navController.navigate("checkout") }) {
                     /*content Scope do PanucciApp*/
                         // TODO implementar o navHost
