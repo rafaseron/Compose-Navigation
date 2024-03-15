@@ -30,8 +30,22 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val currentScreen = ""
             val navController = rememberNavController()
+
+            fun routeFlow(navItem: BottomAppBarItem){
+                if (navItem.label == "Destaques"){
+                    navController.navigate(route = "destaques")
+                }else{
+                    if (navItem.label == "Menu"){
+                        navController.navigate(route = "menu")
+                    }else{
+                        if (navItem.label == "Bebidas"){
+                            navController.navigate(route = "bebidas")
+                        }
+                    }
+                }
+            }
+
             //Cuidados a serem tomados:
             // As navegações devem ser feitas fora do escopo de Composição
             // As rotas devem ser criadas fora do escopo de Composição
@@ -48,7 +62,10 @@ class MainActivity : ComponentActivity() {
                     PanucciApp(
                         bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
-                            selectedItem = it
+                            navItem ->
+                            selectedItem = navItem
+
+                            routeFlow(navItem)
                         }, onFabClick = { navController.navigate("checkout") }) {
                     /*content Scope do PanucciApp*/
                         // TODO implementar o navHost
