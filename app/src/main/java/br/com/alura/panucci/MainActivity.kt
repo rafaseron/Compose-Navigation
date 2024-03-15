@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.sampledata.sampleProductWithImage
@@ -34,13 +35,13 @@ class MainActivity : ComponentActivity() {
 
             fun routeFlow(navItem: BottomAppBarItem){
                 if (navItem.label == "Destaques"){
-                    navController.navigate(route = "destaques")
+                    navController.navigate(route = "Destaques")
                 }else{
                     if (navItem.label == "Menu"){
-                        navController.navigate(route = "menu")
+                        navController.navigate(route = "Menu")
                     }else{
                         if (navItem.label == "Bebidas"){
-                            navController.navigate(route = "bebidas")
+                            navController.navigate(route = "Bebidas")
                         }
                     }
                 }
@@ -55,10 +56,23 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var selectedItem by remember {
-                        val item = bottomAppBarItems.first()
+
+                    val currentBackStack by navController.currentBackStackEntryAsState()
+                    val currentDestination = currentBackStack?.destination
+
+                    var selectedItem by remember(currentDestination) {
+                        val item = currentDestination?.let {
+                            navDestination ->
+                            bottomAppBarItems.find {
+                                bottomBarItem ->
+                                bottomBarItem.route == navDestination.route
+                            }
+
+                        } ?: bottomAppBarItems.first()
+
                         mutableStateOf(item)
                     }
+
                     PanucciApp(
                         bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
@@ -71,13 +85,13 @@ class MainActivity : ComponentActivity() {
                             /* lembrando que então o Label da ListOf<BottomAppBarItem> e as String das route (rotas do navHost)
                             devem ter o mesmo valor (se "Destaques" for com o D maiusculo, os dois devem seguir o mesmo padrao
                              */
-                        }, onFabClick = { navController.navigate("checkout") }) {
+                        }, onFabClick = { navController.navigate("Checkout") }) {
                     /*content Scope do PanucciApp*/
                         // TODO implementar o navHost
-                        NavHost(navController = navController, startDestination = "destaques") {
-                            composable(route = "destaques") {
-                                HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate("checkout") },
-                                    onProductClick = { navController.navigate("productDetail") })
+                        NavHost(navController = navController, startDestination = "Destaques") {
+                            composable(route = "Destaques") {
+                                HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate("Checkout") },
+                                    onProductClick = { navController.navigate("ProductDetail") })
 
                                 /*LAUNCHED EFFECT SERVE PARA NAVEGAR PARA UMA NOVA TELA, tanto apos certo periodo de tempo,
                                 quanto por base de uma condição ou evento
@@ -91,18 +105,18 @@ class MainActivity : ComponentActivity() {
                                 //LaunchedEffect(Unit, block = { navController.navigate(route = "checkout") delay(3000L) })
 
                             }
-                            composable(route = "checkout") {
+                            composable(route = "Checkout") {
                                 CheckoutScreen(products = sampleProducts)
                             }
 
-                            composable(route = "menu") {
+                            composable(route = "Menu") {
                                 MenuListScreen(products = sampleProducts)
                             }
 
-                            composable(route = "bebidas") {
+                            composable(route = "Bebidas") {
                                 DrinksListScreen(products = sampleProducts)
                             }
-                            composable(route = "productDetail") {
+                            composable(route = "ProductDetail") {
                                 ProductDetailsScreen(product = sampleProductWithImage)
                             }
                         }
