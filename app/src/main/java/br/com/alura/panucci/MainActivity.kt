@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import br.com.alura.panucci.navigation.AppDestination
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.sampledata.sampleProductWithImage
 import br.com.alura.panucci.sampledata.sampleProducts
@@ -78,13 +79,13 @@ class MainActivity : ComponentActivity() {
                             /* lembrando que então o Label da ListOf<BottomAppBarItem> e as String das route (rotas do navHost)
                             devem ter o mesmo valor (se "Destaques" for com o D maiusculo, os dois devem seguir o mesmo padrao
                              */
-                        }, onFabClick = { navController.navigate("Checkout") }) {
+                        }, onFabClick = { navController.navigate(AppDestination.Checkout.route) }) {
                     /*content Scope do PanucciApp*/
                         // TODO implementar o navHost
-                        NavHost(navController = navController, startDestination = "Destaques") {
-                            composable(route = "Destaques") {
-                                HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate("Checkout") },
-                                    onProductClick = { navController.navigate("ProductDetail") })
+                        NavHost(navController = navController, startDestination = AppDestination.Highlights.route) {
+                            composable(route = AppDestination.Highlights.route) {
+                                HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate(AppDestination.Checkout.route) },
+                                    onProductClick = { navController.navigate(AppDestination.ProductDetail.route) })
 
                                 /*LAUNCHED EFFECT SERVE PARA NAVEGAR PARA UMA NOVA TELA, tanto apos certo periodo de tempo,
                                 quanto por base de uma condição ou evento
@@ -98,18 +99,18 @@ class MainActivity : ComponentActivity() {
                                 //LaunchedEffect(Unit, block = { navController.navigate(route = "checkout") delay(3000L) })
 
                             }
-                            composable(route = "Checkout") {
+                            composable(route = AppDestination.Checkout.route) {
                                 CheckoutScreen(products = sampleProducts)
                             }
 
-                            composable(route = "Menu") {
+                            composable(route = AppDestination.Menu.route) {
                                 MenuListScreen(products = sampleProducts, menuClick = {navController.navigate(route = "ProductDetail")})
                             }
 
-                            composable(route = "Bebidas") {
+                            composable(route = AppDestination.Drinks.route) {
                                 DrinksListScreen(products = sampleProducts, drinkClick = {navController.navigate(route = "ProductDetail")})
                             }
-                            composable(route = "ProductDetail") {
+                            composable(route = AppDestination.ProductDetail.route) {
                                 ProductDetailsScreen(product = sampleProductWithImage, onClick = {navController.navigate(route = "Checkout")})
                             }
                         }
