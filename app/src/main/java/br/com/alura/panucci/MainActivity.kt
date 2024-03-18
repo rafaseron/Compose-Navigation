@@ -34,23 +34,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             fun routeFlow(navItem: BottomAppBarItem){
-                if (navItem.label == "Destaques"){
-                    navController.navigate(route = "Destaques"){
-                        launchSingleTop = true //nao cria novas instancias de uma rota que está no topo da BackStack
-                        popUpTo(route = "Destaques") //remove todos as telas anteriores que estavam na BackStack
-                        // o combo de launchSingleTop + popUpTo ->
-                        //  faz com que cada rota seja adicionada apenas uma vez para a Pilha.
-                        //  Quando 'repetida' uma rota que ja esta dentro da BackStack, faz com que dê Pop em todos elementos anteriores
-                    }
-                }else{
-                    if (navItem.label == "Menu"){
-                        navController.navigate(route = "Menu")
-                    }else{
-                        if (navItem.label == "Bebidas"){
-                            navController.navigate(route = "Bebidas")
-                        }
-                    }
-                }
+                navController.navigate(route = navItem.label)
             }
 
             //Cuidados a serem tomados:
