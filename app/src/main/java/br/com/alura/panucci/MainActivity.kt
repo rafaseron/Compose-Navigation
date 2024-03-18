@@ -116,14 +116,14 @@ class MainActivity : ComponentActivity() {
                             }
 
                             composable(route = "Menu") {
-                                MenuListScreen(products = sampleProducts)
+                                MenuListScreen(products = sampleProducts, menuClick = {navController.navigate(route = "ProductDetail")})
                             }
 
                             composable(route = "Bebidas") {
-                                DrinksListScreen(products = sampleProducts)
+                                DrinksListScreen(products = sampleProducts, drinkClick = {navController.navigate(route = "ProductDetail")})
                             }
                             composable(route = "ProductDetail") {
-                                ProductDetailsScreen(product = sampleProductWithImage)
+                                ProductDetailsScreen(product = sampleProductWithImage, onClick = {navController.navigate(route = "Checkout")})
                             }
                         }
 

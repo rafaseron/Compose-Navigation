@@ -1,5 +1,6 @@
 package br.com.alura.panucci.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -22,12 +23,14 @@ import coil.compose.AsyncImage
 @Composable
 fun MenuProductCard(
     product: Product,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    menuClick: () -> Unit = {}
 ) {
     Card(
         modifier
             .fillMaxWidth()
             .height(80.dp)
+            .clickable(enabled = true, onClick = menuClick)
     ) {
         Row {
             Column(

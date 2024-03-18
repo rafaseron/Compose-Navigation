@@ -26,6 +26,7 @@ fun DrinksListScreen(
     title: String = "Bebidas",
     products: List<Product> = emptyList(),
     columns: Int = 2,
+    drinkClick: () -> Unit = {}
 ) {
     Column(
         modifier
@@ -51,7 +52,8 @@ fun DrinksListScreen(
         ) {
             items(products) { p ->
                 DrinkProductCard(
-                    product = p
+                    product = p,
+                    drinkClick = drinkClick
                 )
             }
         }

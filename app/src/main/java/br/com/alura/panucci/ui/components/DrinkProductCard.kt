@@ -1,5 +1,6 @@
 package br.com.alura.panucci.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -19,14 +20,17 @@ import coil.compose.AsyncImage
 @Composable
 fun DrinkProductCard(
     product: Product,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    drinkClick: () -> Unit = {}
+
 ) {
     Card(
         modifier
             .width(158.dp)
             .heightIn(
                 min = 100.dp
-            ),
+            )
+            .clickable(enabled = true, onClick = drinkClick),
         shape = RoundedCornerShape(12.dp)
     ) {
         product.image?.let { image ->
