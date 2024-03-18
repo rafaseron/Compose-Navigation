@@ -1,15 +1,8 @@
 package br.com.alura.panucci.navigation
 
-/*
-data class RouteShape(val route: String)
-
-sealed class AppDestination (){
-    val checkout = RouteShape(route = "checkout")
-}
-
-A implementacao abaixo da o mesmo resultado que essa implementacao acima de usar o RouteShape para fazer os AppDestination
- */
-
+data class AppRoutes (val highlights: String = "Destaques", val checkout: String = "Checkout",
+    val menu:String = "Menu", val drinks: String = "Bebidas", val productDetail: String = "ProductDetail")
+// A implementacao AppRoutes da o mesmo resultado que AppDestination
 
 sealed class AppDestination (val route: String){
     object Highlights: AppDestination(route = "Destaques")
