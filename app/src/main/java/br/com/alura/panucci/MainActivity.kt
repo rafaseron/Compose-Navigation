@@ -1,9 +1,7 @@
 package br.com.alura.panucci
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +17,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.navigation.AppDestination
-import br.com.alura.panucci.navigation.Destination
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.sampledata.sampleProductWithImage
 import br.com.alura.panucci.sampledata.sampleProducts
@@ -60,7 +57,7 @@ class MainActivity : ComponentActivity() {
                             navDestination ->
                             bottomAppBarItems.find {
                                 bottomBarItem ->
-                                bottomBarItem.route == navDestination.route
+                                bottomBarItem.destination.route == navDestination.route
                             }
 
                         } ?: bottomAppBarItems.first()
