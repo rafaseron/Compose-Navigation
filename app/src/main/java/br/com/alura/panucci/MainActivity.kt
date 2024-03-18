@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.navigation.AppDestination
+import br.com.alura.panucci.navigation.Destination
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.sampledata.sampleProductWithImage
 import br.com.alura.panucci.sampledata.sampleProducts
@@ -81,7 +82,6 @@ class MainActivity : ComponentActivity() {
                              */
                         }, onFabClick = { navController.navigate(AppDestination.Checkout.route) }) {
                     /*content Scope do PanucciApp*/
-                        // TODO implementar o navHost
                         NavHost(navController = navController, startDestination = AppDestination.Highlights.route) {
                             composable(route = AppDestination.Highlights.route) {
                                 HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate(AppDestination.Checkout.route) },
