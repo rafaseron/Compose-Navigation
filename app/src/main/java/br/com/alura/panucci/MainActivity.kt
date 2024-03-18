@@ -65,7 +65,43 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf(item)
                     }
 
+                    fun showBottomBar(): Boolean{
+                        currentDestination?.let {
+                         p ->
+                            when (p.route.toString()){
+                                "Destaques" -> return true
+                                "Menu" -> return true
+                                "Bebidas" -> return true
+                                else -> return false
+                            }
+                        } ?: return false
+                    }
+
+                    fun showTopBar(): Boolean{
+                        currentDestination?.let {
+                            p ->
+                            when (p.route.toString()){
+                                "Destaques" -> return true
+                                else -> return false
+                            }
+                        } ?: return false
+                    }
+
+                    fun showFAB(): Boolean {
+                        currentDestination?.let {
+                            p ->
+                            when (p.route.toString()){
+                                "Menu" -> return true
+                                "Bebidas" -> return true
+                                else -> return false
+                            }
+                        } ?: return false
+                    }
+
                     PanucciApp(
+                        showBottomBar = showBottomBar(),
+                        showTopBar = showTopBar(),
+                        showFAB = showFAB(),
                         bottomAppBarItemSelected = selectedItem,
                         onBottomAppBarItemSelectedChange = {
                             navItem ->
@@ -79,6 +115,9 @@ class MainActivity : ComponentActivity() {
                              */
                         }, onFabClick = { navController.navigate(AppDestination.Checkout.route) }) {
                     /*content Scope do PanucciApp*/
+                        // JA QUE ESSE EH O CONTENT SCOPE DO PANUCCIAPP (E EH PASSADO POR MEIO DE LAMBDA), ELE DEVE SER O ULTIMO ARGUMENTO A SER PASSADO PRO PARAMETRO
+                        // (E ULTIMO PARAMETRO ESPERADO NO COMPOSABLE)
+
                         NavHost(navController = navController, startDestination = AppDestination.Highlights.route) {
                             composable(route = AppDestination.Highlights.route) {
                                 HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate(AppDestination.Checkout.route) },
@@ -127,31 +166,41 @@ fun PanucciApp(
     bottomAppBarItemSelected: BottomAppBarItem = bottomAppBarItems.first(),
     onBottomAppBarItemSelectedChange: (BottomAppBarItem) -> Unit = {},
     onFabClick: () -> Unit = {},
-    content: @Composable () -> Unit
+    showTopBar: Boolean = false,
+    showBottomBar: Boolean = false,
+    showFAB: Boolean = false,
+    content: @Composable () -> Unit,
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(text = "Ristorante Panucci")
-                },
-            )
+            if(showTopBar){
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(text = "Ristorante Panucci")
+                    },
+                )
+            }
+
         },
         bottomBar = {
-            PanucciBottomAppBar(
-                item = bottomAppBarItemSelected,
-                items = bottomAppBarItems,
-                onItemChange = onBottomAppBarItemSelectedChange,
-            )
+            if (showBottomBar){
+                PanucciBottomAppBar(
+                    item = bottomAppBarItemSelected,
+                    items = bottomAppBarItems,
+                    onItemChange = onBottomAppBarItemSelectedChange,
+                )
+            }
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = onFabClick
-            ) {
-                Icon(
-                    Icons.Filled.PointOfSale,
-                    contentDescription = null
-                )
+            if(showFAB){
+                FloatingActionButton(
+                    onClick = onFabClick
+                ) {
+                    Icon(
+                        Icons.Filled.PointOfSale,
+                        contentDescription = null
+                    )
+                }
             }
         }
     ) {
