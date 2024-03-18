@@ -34,7 +34,10 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             fun routeFlow(navItem: BottomAppBarItem){
-                navController.navigate(route = navItem.label)
+                navController.navigate(route = navItem.label){
+                    launchSingleTop = true
+                    popUpTo(route = navItem.label)
+                }
             }
 
             //Cuidados a serem tomados:
