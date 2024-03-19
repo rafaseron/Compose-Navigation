@@ -140,7 +140,7 @@ class MainActivity : ComponentActivity() {
 
                             }
                             composable(route = AppDestination.Checkout.route) {
-                                CheckoutScreen(products = sampleProducts)
+                                CheckoutScreen(products = sampleProducts, onOrderClick = {navController.popBackStack() /* OU navController.navigateUp()*/})
                             }
 
                             composable(route = AppDestination.Menu.route) {
