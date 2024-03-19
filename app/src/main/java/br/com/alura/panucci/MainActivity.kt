@@ -162,7 +162,10 @@ class MainActivity : ComponentActivity() {
                                     // como o find retorna um valor possivelmente nulo, acessamos com let para mandar o Produto nao nulo na chamada da tela
                                     product ->
                                     ProductDetailsScreen(product = product, onClick = {navController.navigate(route = AppDestination.Checkout.route)})
-                                }
+                                } ?: //navController.popBackStack()  OU:
+                                    LaunchedEffect(Unit) {
+                                        navController.navigateUp()  //navigateUp tem Side Effects por recomposicao, entao precisa ser executado dentro de LaunchedEffect
+                                    }
                             }
                         }
 
