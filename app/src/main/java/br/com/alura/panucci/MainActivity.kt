@@ -153,9 +153,16 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(route = "${AppDestination.ProductDetail.route}/${it.iD}")})
                             }
                             composable(route = "${AppDestination.ProductDetail.route}/{productId}") {
-                                val id = it.arguments?.getString("productId")
+                                val id = it.arguments?.getString("productId") //puxa o valor recebido por parametro em {productId}
 
-                                ProductDetailsScreen(product = sampleProductWithImage, onClick = {navController.navigate(route = AppDestination.Checkout.route)})
+                                sampleProducts.find {
+                                    p ->
+                                    p.iD == id //procura na lista de dados qual Produto tem o mesmo valor de iD do que o {productId} que foi recebido por parametro
+                                }?.let {
+                                    // como o find retorna um valor possivelmente nulo, acessamos com let para mandar o Produto nao nulo na chamada da tela
+                                    product ->
+                                    ProductDetailsScreen(product = product, onClick = {navController.navigate(route = AppDestination.Checkout.route)})
+                                }
                             }
                         }
 
