@@ -124,7 +124,8 @@ class MainActivity : ComponentActivity() {
                         NavHost(navController = navController, startDestination = AppDestination.Highlights.route) {
                             composable(route = AppDestination.Highlights.route) {
                                 HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate(AppDestination.Checkout.route) },
-                                    onProductClick = { navController.navigate("${AppDestination.ProductDetail.route}/productId") })
+                                    onProductClick = {
+                                        navController.navigate("${AppDestination.ProductDetail.route}/${it.iD}") })
 
                                 /*LAUNCHED EFFECT SERVE PARA NAVEGAR PARA UMA NOVA TELA, tanto apos certo periodo de tempo,
                                 quanto por base de uma condição ou evento
@@ -143,11 +144,13 @@ class MainActivity : ComponentActivity() {
                             }
 
                             composable(route = AppDestination.Menu.route) {
-                                MenuListScreen(products = sampleProducts, menuClick = {navController.navigate(route = "${AppDestination.ProductDetail.route}/productId")})
+                                MenuListScreen(products = sampleProducts, menuClick = {
+                                    navController.navigate(route = "${AppDestination.ProductDetail.route}/${it.iD}")})
                             }
 
                             composable(route = AppDestination.Drinks.route) {
-                                DrinksListScreen(products = sampleProducts, drinkClick = {navController.navigate(route = "${AppDestination.ProductDetail.route}/productId")})
+                                DrinksListScreen(products = sampleProducts, drinkClick = {
+                                    navController.navigate(route = "${AppDestination.ProductDetail.route}/${it.iD}")})
                             }
                             composable(route = "${AppDestination.ProductDetail.route}/{productId}") {
                                 val id = it.arguments?.getString("productId")
