@@ -12,10 +12,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import br.com.alura.panucci.navigation.AppDestination
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.sampledata.sampleProductWithImage
@@ -121,7 +124,7 @@ class MainActivity : ComponentActivity() {
                         NavHost(navController = navController, startDestination = AppDestination.Highlights.route) {
                             composable(route = AppDestination.Highlights.route) {
                                 HighlightsListScreen(products = sampleProducts, onOrderClick = { navController.navigate(AppDestination.Checkout.route) },
-                                    onProductClick = { navController.navigate(AppDestination.ProductDetail.route) })
+                                    onProductClick = { navController.navigate("${AppDestination.ProductDetail.route}/productId") })
 
                                 /*LAUNCHED EFFECT SERVE PARA NAVEGAR PARA UMA NOVA TELA, tanto apos certo periodo de tempo,
                                 quanto por base de uma condição ou evento
@@ -140,13 +143,15 @@ class MainActivity : ComponentActivity() {
                             }
 
                             composable(route = AppDestination.Menu.route) {
-                                MenuListScreen(products = sampleProducts, menuClick = {navController.navigate(route = AppDestination.ProductDetail.route)})
+                                MenuListScreen(products = sampleProducts, menuClick = {navController.navigate(route = "${AppDestination.ProductDetail.route}/productId")})
                             }
 
                             composable(route = AppDestination.Drinks.route) {
-                                DrinksListScreen(products = sampleProducts, drinkClick = {navController.navigate(route = AppDestination.ProductDetail.route)})
+                                DrinksListScreen(products = sampleProducts, drinkClick = {navController.navigate(route = "${AppDestination.ProductDetail.route}/productId")})
                             }
-                            composable(route = AppDestination.ProductDetail.route) {
+                            composable(route = "${AppDestination.ProductDetail.route}/{productId}") {
+                                val id = it.arguments?.getString("productId")
+
                                 ProductDetailsScreen(product = sampleProductWithImage, onClick = {navController.navigate(route = AppDestination.Checkout.route)})
                             }
                         }
