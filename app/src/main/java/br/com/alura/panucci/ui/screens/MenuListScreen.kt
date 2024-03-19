@@ -22,7 +22,7 @@ fun MenuListScreen(
     modifier: Modifier = Modifier,
     title: String = "Menu",
     products: List<Product> = emptyList(),
-    menuClick: () -> Unit = {}
+    menuClick: (Product) -> Unit = {}
 ) {
     Column(
         modifier.fillMaxSize()
@@ -47,7 +47,7 @@ fun MenuListScreen(
             items(products) { p ->
                 MenuProductCard(
                     product = p,
-                    menuClick = menuClick
+                    menuClick = { menuClick(p) }
                 )
             }
         }
