@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.screens.HighlightsListScreen
 
-fun NavGraphBuilder.hightlightListScreen(navController: NavHostController) {
+fun NavGraphBuilder.highlightListScreen(navController: NavHostController) {
     composable(route = AppDestination.Highlights.route) {
         HighlightsListScreen(products = sampleProducts,
             onOrderClick = { navController.navigate(AppDestination.Checkout.route) },
