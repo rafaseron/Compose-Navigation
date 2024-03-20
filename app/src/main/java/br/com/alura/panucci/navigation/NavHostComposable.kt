@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 
 @Composable
 fun NavHostComposable(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = AppDestination.Highlights.route) {
+    NavHost(navController = navController, startDestination = highlightListRoute) {
         highlightListScreen(navController)
         checkoutScreen(navController)
         menuListScreen(navController)
