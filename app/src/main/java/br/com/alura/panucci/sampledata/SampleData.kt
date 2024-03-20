@@ -6,6 +6,9 @@ import androidx.compose.material.icons.filled.RestaurantMenu
 import androidx.compose.material.icons.outlined.LocalBar
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.panucci.model.Product
+import br.com.alura.panucci.navigation.drinksRoute
+import br.com.alura.panucci.navigation.highlightListRoute
+import br.com.alura.panucci.navigation.menuRoute
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import java.math.BigDecimal
 import kotlin.random.Random
@@ -39,16 +42,16 @@ val bottomAppBarItems = listOf(
     BottomAppBarItem(
         label = "Destaques",
         icon = Icons.Filled.AutoAwesome,
-        destination = "Destaques" //TODO mudar para comecar a usar os navigateTo
+        destination = highlightListRoute //
     ),
     BottomAppBarItem(
         label = "Menu",
         icon = Icons.Filled.RestaurantMenu,
-        destination = "Menu" //TODO mudar para comecar a usar os navigateTo
+        destination = menuRoute //
     ),
     BottomAppBarItem(
         label = "Bebidas",
         icon = Icons.Outlined.LocalBar,
-        destination = "Bebidas" //TODO mudar para comecar a usar os navigateTo
+        destination = drinksRoute //
     ),
 )

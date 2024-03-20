@@ -16,6 +16,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.navigation.NavHostComposable
+import br.com.alura.panucci.navigation.drinksRoute
+import br.com.alura.panucci.navigation.highlightListRoute
+import br.com.alura.panucci.navigation.menuRoute
 import br.com.alura.panucci.navigation.navigateToCheckout
 import br.com.alura.panucci.navigation.navigateToDetails
 import br.com.alura.panucci.navigation.navigateToDrinks
@@ -80,9 +83,9 @@ class MainActivity : ComponentActivity() {
                         currentDestination?.let {
                          p ->
                             when (p.route.toString()){
-                                "Destaques" -> return true
-                                "Menu" -> return true
-                                "Bebidas" -> return true
+                                highlightListRoute -> return true
+                                menuRoute -> return true
+                                drinksRoute -> return true
                                 else -> return false
                             }
                         } ?: return false
@@ -92,7 +95,7 @@ class MainActivity : ComponentActivity() {
                         currentDestination?.let {
                             p ->
                             when (p.route.toString()){
-                                "Destaques" -> return true
+                                highlightListRoute -> return true
                                 else -> return false
                             }
                         } ?: return false
@@ -102,8 +105,8 @@ class MainActivity : ComponentActivity() {
                         currentDestination?.let {
                             p ->
                             when (p.route.toString()){
-                                "Menu" -> return true
-                                "Bebidas" -> return true
+                                menuRoute -> return true
+                                drinksRoute -> return true
                                 else -> return false
                             }
                         } ?: return false
