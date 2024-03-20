@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.navigation.NavHostComposable
+import br.com.alura.panucci.navigation.checkoutRoute
 import br.com.alura.panucci.navigation.drinksRoute
 import br.com.alura.panucci.navigation.highlightListRoute
 import br.com.alura.panucci.navigation.menuRoute
@@ -24,6 +25,7 @@ import br.com.alura.panucci.navigation.navigateToDetails
 import br.com.alura.panucci.navigation.navigateToDrinks
 import br.com.alura.panucci.navigation.navigateToHighLightScreen
 import br.com.alura.panucci.navigation.navigateToMenu
+import br.com.alura.panucci.navigation.productDetailsRoute
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
@@ -36,21 +38,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            fun routeFlow(navItem: BottomAppBarItem, navController: NavController, productId: String = ""): Unit{
+            fun routeFlow(navItem: BottomAppBarItem, navController: NavController, productId: String = ""){
                 return when(navItem.label){
-                    "Destaques" -> navController.navigateToHighLightScreen()
-                    "Checkout" -> navController.navigateToCheckout()
-                    "Menu" -> navController.navigateToMenu()
-                    "Bebidas" -> navController.navigateToDrinks()
-                    "ProductDetail" -> navController.navigateToDetails(productId = productId)
+                    highlightListRoute -> navController.navigateToHighLightScreen()
+                    checkoutRoute -> navController.navigateToCheckout()
+                    menuRoute -> navController.navigateToMenu()
+                    drinksRoute -> navController.navigateToDrinks()
+                    productDetailsRoute -> navController.navigateToDetails(productId = productId)
                     else -> navController.navigateToHighLightScreen()
                 }
-                /* TODO adicionar launchSingleTop e popUpTo para as rotas (porque o routeFlow é usado no BottomBar)
-                navController.navigate(route = navItem.label){
-                    launchSingleTop = true
-                    popUpTo(route = navItem.label)
-                }
-                 */
             }
 
             //Cuidados a serem tomados:
@@ -120,13 +116,7 @@ class MainActivity : ComponentActivity() {
                         onBottomAppBarItemSelectedChange = {
                             navItem ->
                             selectedItem = navItem
-
                             routeFlow(navItem, navController)
-                            //TAMBEM DA PRA FAZER COMO:
-                            // navController.navigate(route = navItem.label)
-                            /* lembrando que então o Label da ListOf<BottomAppBarItem> e as String das route (rotas do navHost)
-                            devem ter o mesmo valor (se "Destaques" for com o D maiusculo, os dois devem seguir o mesmo padrao
-                             */
                         }, onFabClick = { navController.navigateToCheckout() }) {
                     /*content Scope do PanucciApp*/
                         // JA QUE ESSE EH O CONTENT SCOPE DO PANUCCIAPP (E EH PASSADO POR MEIO DE LAMBDA), ELE DEVE SER O ULTIMO ARGUMENTO A SER PASSADO PRO PARAMETRO
