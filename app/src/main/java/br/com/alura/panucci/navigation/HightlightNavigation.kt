@@ -19,6 +19,9 @@ fun NavGraphBuilder.highlightListScreen(navController: NavHostController) {
 }
 
 fun NavController.navigateToHighLightScreen(){
-    navigate(route = highlightListRoute)
+    navigate(route = highlightListRoute){
+        launchSingleTop
+        popUpTo(highlightListRoute)
+    }
 }
 //funcao global que oferecemos para seja feita a navegacao para este destino

@@ -30,5 +30,8 @@ fun NavGraphBuilder.productDetailsScreen(navController: NavHostController){
 }
 
 fun NavController.navigateToDetails(productId: String){
-    navigate(route = "${productDetailsRoute}/${productId}")
+    navigate(route = "${productDetailsRoute}/${productId}"){
+        launchSingleTop
+        popUpTo(productDetailsRoute)
+    }
 }

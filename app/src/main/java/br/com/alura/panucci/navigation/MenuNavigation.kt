@@ -17,5 +17,8 @@ fun NavGraphBuilder.menuListScreen(navController: NavHostController) {
 }
 
 fun NavController.navigateToMenu(){
-    navigate(route = menuRoute)
+    navigate(route = menuRoute){
+        launchSingleTop
+        popUpTo(menuRoute)
+    }
 }

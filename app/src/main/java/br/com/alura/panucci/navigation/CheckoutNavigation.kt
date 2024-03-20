@@ -17,5 +17,8 @@ fun NavGraphBuilder.checkoutScreen(navController: NavHostController) {
 }
 
 fun NavController.navigateToCheckout(){
-    navigate(route = checkoutRoute)
+    navigate(route = checkoutRoute){
+        launchSingleTop
+        popUpTo(checkoutRoute)
+    }
 }

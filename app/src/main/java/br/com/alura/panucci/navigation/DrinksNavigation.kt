@@ -17,5 +17,8 @@ fun NavGraphBuilder.drinksListScreen(navController: NavHostController) {
 }
 
 fun NavController.navigateToDrinks(){
-    navigate(route = drinksRoute)
+    navigate(route = drinksRoute){
+        launchSingleTop
+        popUpTo(drinksRoute)
+    }
 }
