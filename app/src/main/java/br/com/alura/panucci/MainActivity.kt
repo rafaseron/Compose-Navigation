@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.com.alura.panucci.navigation.AppDestination
 import br.com.alura.panucci.navigation.NavHostComposable
 import br.com.alura.panucci.navigation.navigateToCheckout
 import br.com.alura.panucci.navigation.navigateToDetails
@@ -69,7 +68,7 @@ class MainActivity : ComponentActivity() {
                             navDestination ->
                             bottomAppBarItems.find {
                                 bottomBarItem ->
-                                bottomBarItem.destination.route == navDestination.route
+                                bottomBarItem.destination == navDestination.route //TODO verificar se eese codigo nao deu merda
                             }
 
                         } ?: bottomAppBarItems.first()
