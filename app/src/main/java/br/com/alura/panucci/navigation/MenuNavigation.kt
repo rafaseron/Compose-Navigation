@@ -11,7 +11,7 @@ private const val menuRoute = "Menu"
 fun NavGraphBuilder.menuListScreen(navController: NavHostController) {
     composable(route = menuRoute) {
         MenuListScreen(products = sampleProducts, menuClick = {
-            navController.navigate(route = "${AppDestination.ProductDetail.route}/${it.iD}")
+            navController.navigateToDetails(it.iD)
         })
     }
 }

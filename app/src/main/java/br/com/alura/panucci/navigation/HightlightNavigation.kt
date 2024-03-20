@@ -11,9 +11,9 @@ private const val highlightListRoute = "Destaques" //'const val' porque 'const' 
 fun NavGraphBuilder.highlightListScreen(navController: NavHostController) {
     composable(route = highlightListRoute) {
         HighlightsListScreen(products = sampleProducts,
-            onOrderClick = { navController.navigate(AppDestination.Checkout.route) },
+            onOrderClick = { navController.navigateToCheckout() },
             onProductClick = {
-                navController.navigate("${AppDestination.ProductDetail.route}/${it.iD}")
+                navController.navigateToDetails(it.iD)
             })
     }
 }
