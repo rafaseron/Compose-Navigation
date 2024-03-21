@@ -59,7 +59,10 @@ fun ProductDetailsScreen(
                 }
             }
         }
+    } ?: Column(modifier = Modifier.fillMaxSize(1f)) {
+        Text(text = "Oops! tivemos falhas ao tentar mostrar nosso produtos a você D:")
     }
+
 }
 
 @Preview
