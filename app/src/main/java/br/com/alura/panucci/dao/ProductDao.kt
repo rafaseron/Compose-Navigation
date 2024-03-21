@@ -11,16 +11,13 @@ class ProductDao{
     private val _products = MutableStateFlow(sampleProducts)
     val products = _products.asStateFlow()
 
-    fun findByIdWithResponse(id: String): Product{
+    fun findByIdWithResponse(id: String): Product?{
         val listProducts = products.value
         val searchProduct = listProducts.find {
                 p ->
                 p.iD == id
         }
-        searchProduct?.let {
-            product ->
-            return product
-        } ?: return Product("1", "", BigDecimal.ZERO, "", null) //entrega iD "1" porque ai eh so verificar que if (iD == "1") nao faz nada
+        return searchProduct
     }
     fun findById(id: String){
         val listProducts = products.value
