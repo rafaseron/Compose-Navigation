@@ -7,12 +7,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.screens.HighlightsListScreen
 import br.com.alura.panucci.ui.viewmodels.HighlightViewModel
 
 internal const val highlightListRoute = "Destaques" //'const val' porque 'const' nao é processada -> o build trata como um valor sempre conhecido, nao tenta ler de novo
-fun NavGraphBuilder.highlightListScreen(navController: NavHostController) {
+fun NavGraphBuilder.highlightNavigation(navController: NavHostController) {
     composable(route = highlightListRoute) {
         val viewModel:HighlightViewModel = viewModel()
         val uiState by viewModel.uiState.collectAsState()

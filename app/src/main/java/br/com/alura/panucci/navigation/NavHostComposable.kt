@@ -1,7 +1,6 @@
 package br.com.alura.panucci.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -19,8 +18,8 @@ fun NavHostComposable(navController: NavHostController) {
          */
         homeGraph(navController)    //essa tecnica de Aninhar Graphos é complexa, mas tu tem que saber que ela existe - porque vai tu trabalhe em um app que seja assim
 
-        productDetailsScreen(navController)
-        checkoutScreen(navController)
+        productDetailNavigation(navController)
+        checkoutNavigation(navController)
     }
 }
 
@@ -28,8 +27,8 @@ fun NavHostComposable(navController: NavHostController) {
 internal const val homeGraph = "homeGraphRoute"
 fun NavGraphBuilder.homeGraph(navController: NavHostController){
     navigation(route = homeGraph, startDestination = highlightListRoute){
-        highlightListScreen(navController)
-        menuListScreen(navController)
-        drinksListScreen(navController)
+        highlightNavigation(navController)
+        menuNavigation(navController)
+        drinksNavigation(navController)
     }
 }

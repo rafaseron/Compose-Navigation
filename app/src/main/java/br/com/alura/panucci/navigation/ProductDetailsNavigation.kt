@@ -13,7 +13,7 @@ import br.com.alura.panucci.ui.viewmodels.ProductDetailViewModel
 
 internal const val productDetailsRoute = "ProductDetail"
 private const val productId = "productId"
-fun NavGraphBuilder.productDetailsScreen(navController: NavHostController){
+fun NavGraphBuilder.productDetailNavigation(navController: NavHostController){
     composable(route = "$productDetailsRoute/{$productId}") {
         navBackStackEntry ->
         navBackStackEntry.arguments?.getString(productId)?.let {

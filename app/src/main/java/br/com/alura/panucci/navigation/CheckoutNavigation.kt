@@ -7,12 +7,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.screens.CheckoutScreen
 import br.com.alura.panucci.ui.viewmodels.CheckoutViewModel
 
 internal const val checkoutRoute = "Checkout"
-fun NavGraphBuilder.checkoutScreen(navController: NavHostController) {
+fun NavGraphBuilder.checkoutNavigation(navController: NavHostController) {
     composable(route = checkoutRoute) {
         val viewModel: CheckoutViewModel = viewModel()
         val uiState by viewModel.uiState.collectAsState()
