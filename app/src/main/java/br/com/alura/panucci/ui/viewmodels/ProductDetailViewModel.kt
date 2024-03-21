@@ -24,11 +24,15 @@ class ProductDetailViewModel(stateHolder: ProductDetailUiState = ProductDetailUi
 
         searchProduct?.let {
             _uiState.value = _uiState.value.copy(product = searchProduct)
-            _uiState.value = _uiState.value.copy(screenState = "Sucess")
+            onSucess()
         } ?: onFailure()
     }
 
     fun onFailure(){
         _uiState.value = _uiState.value.copy(screenState = "Error")
+    }
+
+    fun onSucess(){
+        _uiState.value = _uiState.value.copy(screenState = "Sucess")
     }
 }
