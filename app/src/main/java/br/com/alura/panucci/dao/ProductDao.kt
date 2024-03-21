@@ -20,7 +20,7 @@ class ProductDao{
         searchProduct?.let {
             product ->
             return product
-        } ?: return Product("", "", BigDecimal.ZERO, "", null)
+        } ?: return Product("1", "", BigDecimal.ZERO, "", null) //entrega iD "1" porque ai eh so verificar que if (iD == "1") nao faz nada
     }
     fun findById(id: String){
         val listProducts = products.value
