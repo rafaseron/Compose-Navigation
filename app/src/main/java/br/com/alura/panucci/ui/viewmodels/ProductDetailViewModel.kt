@@ -6,7 +6,7 @@ import br.com.alura.panucci.model.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-data class ProductDetailUiState (val product: Product? = null)
+data class ProductDetailUiState (val product: Product? = null, val screenState: String = "Loading")
 
 class ProductDetailViewModel(stateHolder: ProductDetailUiState = ProductDetailUiState()): ViewModel(){
     private val _uiState = MutableStateFlow(stateHolder)
@@ -19,8 +19,16 @@ class ProductDetailViewModel(stateHolder: ProductDetailUiState = ProductDetailUi
         val listProducts = product.value
         val searchProduct = listProducts.find {
                 p ->
-            p.iD == id
+                p.iD == id
         }
-        _uiState.value = _uiState.value.copy(product = searchProduct)
+
+        searchProduct?.let {
+            _uiState.value = _uiState.value.copy(product = searchProduct)
+            _uiState.value = _uiState.value.copy(screenState = "Sucess")
+        } ?: onFailure()
+    }
+
+    fun onFailure(){
+        _uiState.value = _uiState.value.copy(screenState = "Error")
     }
 }
