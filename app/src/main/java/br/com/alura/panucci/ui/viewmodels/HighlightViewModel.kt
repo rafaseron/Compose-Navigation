@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 data class HighlightUiState (val listDestaques: List<Product> = emptyList())
 
-class HighlightViewModel(stateHolder: HighlightUiState): ViewModel(){
+class HighlightViewModel(stateHolder: HighlightUiState = HighlightUiState()): ViewModel(){
     private val _uiState = MutableStateFlow(stateHolder)
     val uiState = _uiState.asStateFlow()
 

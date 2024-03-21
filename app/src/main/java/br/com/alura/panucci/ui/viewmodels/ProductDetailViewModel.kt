@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 data class ProductDetailUiState (val product: Product? = null)
 
-class ProductDetailViewModel(stateHolder: ProductDetailUiState): ViewModel(){
+class ProductDetailViewModel(stateHolder: ProductDetailUiState = ProductDetailUiState()): ViewModel(){
     private val _uiState = MutableStateFlow(stateHolder)
     val uiState = _uiState.asStateFlow()
 

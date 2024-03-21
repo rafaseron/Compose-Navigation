@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 data class CheckoutUiState(val listProduct: List<Product> = emptyList())
 
-class CheckoutViewModel(stateHolder: CheckoutUiState): ViewModel(){
+class CheckoutViewModel(stateHolder: CheckoutUiState = CheckoutUiState()): ViewModel(){
     private val _uiState = MutableStateFlow(stateHolder)
     val uiState = _uiState.asStateFlow()
 
