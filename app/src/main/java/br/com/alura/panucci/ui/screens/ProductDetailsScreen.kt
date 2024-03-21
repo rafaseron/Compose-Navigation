@@ -33,11 +33,14 @@ fun ProductDetailsScreen(
                     .fillMaxSize(1f)
                     .align(Alignment.Center)) }
 
-            "Error" -> Column(modifier.fillMaxSize(1f), verticalArrangement = Arrangement.spacedBy(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            "Error" -> Column(modifier.fillMaxSize(1f), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(text = "Falha ao buscar o produto")
+                Spacer(modifier = Modifier.height(8.dp))
                 Button(onClick = { tryAgainClick() }) {
                     Text(text = "Tentar novamente")
                 }
+                Spacer(modifier = Modifier.height(8.dp))
                 TextButton(onClick = { voltarClick() }) {
                     Text(text = "Voltar")
                 }
