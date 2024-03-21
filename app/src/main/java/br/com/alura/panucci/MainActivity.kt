@@ -33,6 +33,17 @@ import br.com.alura.panucci.ui.theme.PanucciTheme
 
 class MainActivity : ComponentActivity() {
 
+    /* Agora, no lugar de criar os ViewModel na MainActivity e passar pro NavHost -> ScreenNavigation -> ScreenComposable,
+    Eles são criados direto no ScreenNavigation e ai passa pro ScreenComposable apenas o uiState
+
+    val checkoutViewModel: CheckoutViewModel by viewModels()
+    val drinksViewModel: DrinksViewModel by viewModels()
+    val highlightViewModel: HighlightViewModel by viewModels()
+    val menuViewModel: MenuViewModel by viewModels()
+    val productDetailViewModel: ProductDetailViewModel by viewModels()
+     */
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
