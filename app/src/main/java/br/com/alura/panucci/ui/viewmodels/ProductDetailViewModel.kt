@@ -15,10 +15,12 @@ class ProductDetailViewModel(stateHolder: ProductDetailUiState = ProductDetailUi
     private val dao = ProductDao()
     private val product = dao.products
 
-    init {
-        for (p in product.value){
-            val produtoPesquisado = dao.findByIdWithResponse(p.iD)
-            _uiState.value = _uiState.value.copy(product = produtoPesquisado)
+    fun findByIdWithResponse(id: String){
+        val listProducts = product.value
+        val searchProduct = listProducts.find {
+                p ->
+            p.iD == id
         }
+        _uiState.value = _uiState.value.copy(product = searchProduct)
     }
 }
