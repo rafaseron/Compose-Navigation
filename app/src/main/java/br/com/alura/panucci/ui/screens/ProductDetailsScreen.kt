@@ -1,6 +1,5 @@
 package br.com.alura.panucci.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,39 +22,41 @@ fun ProductDetailsScreen(
     uiState: ProductDetailUiState = ProductDetailUiState(),
     onClick: () -> Unit = {}
 ) {
-    val product = uiState.product!!
-    Column(
-        modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        product.image?.let {
-            AsyncImage(
-                model = product.image,
-                contentDescription = null,
-                modifier = Modifier
-                    .height(200.dp)
-                    .fillMaxWidth(),
-                placeholder = painterResource(id = R.drawable.placeholder),
-                contentScale = ContentScale.Crop
-            )
-        }
+    uiState.product?.let {
+        product ->
         Column(
-            Modifier
-                .padding(16.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
-            Text(product.name, fontSize = 24.sp)
-            Text(product.price.toPlainString(), fontSize = 18.sp)
-            Text(product.description)
-            Button(
-                onClick = { onClick() },
+            product.image?.let {
+                AsyncImage(
+                    model = product.image,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(200.dp)
+                        .fillMaxWidth(),
+                    placeholder = painterResource(id = R.drawable.placeholder),
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Column(
                 Modifier
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                    .padding(16.dp)
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text(text = "Pedir")
+                Text(product.name, fontSize = 24.sp)
+                Text(product.price.toPlainString(), fontSize = 18.sp)
+                Text(product.description)
+                Button(
+                    onClick = { onClick() },
+                    Modifier
+                        .fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                ) {
+                    Text(text = "Pedir")
+                }
             }
         }
     }
