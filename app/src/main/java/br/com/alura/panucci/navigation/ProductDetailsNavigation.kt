@@ -21,7 +21,7 @@ fun NavGraphBuilder.productDetailsScreen(navController: NavHostController){
             viewModel.findByIdWithResponse(it)
             val uiState by viewModel.uiState.collectAsState()
 
-            ProductDetailsScreen(uiState = uiState, onClick = {navController.navigateToCheckout()})
+            ProductDetailsScreen(uiState = uiState, onClick = {navController.navigateToCheckout()}, tryAgainClick = {viewModel.findByIdWithResponse(it)}, voltarClick = {navController.popBackStack()})
 
         } ?: //navController.popBackStack()  OU:
         LaunchedEffect(Unit) {

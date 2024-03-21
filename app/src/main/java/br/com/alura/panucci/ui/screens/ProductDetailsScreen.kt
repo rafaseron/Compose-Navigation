@@ -1,10 +1,13 @@
 package br.com.alura.panucci.ui.screens
 
+import android.graphics.drawable.shapes.Shape
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -20,15 +23,34 @@ import coil.compose.AsyncImage
 fun ProductDetailsScreen(
     modifier: Modifier = Modifier,
     uiState: ProductDetailUiState = ProductDetailUiState(),
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    tryAgainClick:() -> Unit = {},
+    voltarClick:() -> Unit = {}
 ) {
-    uiState.product?.let {
-        product ->
-        Column(
-            modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-        ) {
+    when(uiState.screenState){
+        "Loading" -> Box(modifier = Modifier.fillMaxSize(1f)){
+                CircularProgressIndicator(modifier = Modifier
+                    .fillMaxSize(1f)
+                    .align(Alignment.Center)) }
+
+            "Error" -> Column(modifier.fillMaxSize(1f), verticalArrangement = Arrangement.spacedBy(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "Falha ao buscar o produto")
+                Button(onClick = { tryAgainClick() }) {
+                    Text(text = "Tentar novamente")
+                }
+                TextButton(onClick = { voltarClick() }) {
+                    Text(text = "Voltar")
+                }
+
+            }
+                "Sucess" -> Column(
+                    modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        ) {
+        uiState.product?.let {
+            product ->
+
             product.image?.let {
                 AsyncImage(
                     model = product.image,
@@ -58,9 +80,13 @@ fun ProductDetailsScreen(
                     Text(text = "Pedir")
                 }
             }
+        } ?: Column(modifier = Modifier.fillMaxSize(1f), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Oops! tivemos falhas ao tentar mostrar nosso produtos a você D:")
         }
-    } ?: Column(modifier = Modifier.fillMaxSize(1f)) {
-        Text(text = "Oops! tivemos falhas ao tentar mostrar nosso produtos a você D:")
+    }
+        else -> Column(modifier = Modifier.fillMaxSize(1f), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Oops! tivemos falhas ao tentar mostrar nosso produtos a você D:")
+        }
     }
 
 }
