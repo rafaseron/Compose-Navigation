@@ -16,14 +16,16 @@ import br.com.alura.panucci.sampledata.sampleProducts
 import br.com.alura.panucci.ui.components.MenuProductCard
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import br.com.alura.panucci.ui.theme.caveatFont
+import br.com.alura.panucci.ui.viewmodels.MenuUiState
 
 @Composable
 fun MenuListScreen(
     modifier: Modifier = Modifier,
     title: String = "Menu",
-    products: List<Product> = emptyList(),
+    uiState: MenuUiState = MenuUiState(),
     menuClick: (Product) -> Unit = {}
 ) {
+    val products = uiState.listMenu
     Column(
         modifier.fillMaxSize()
     ) {
@@ -60,7 +62,7 @@ fun MenuListScreenPreview() {
     PanucciTheme {
         Surface {
             MenuListScreen(
-                products = sampleProducts
+                uiState = MenuUiState()
             )
         }
     }
