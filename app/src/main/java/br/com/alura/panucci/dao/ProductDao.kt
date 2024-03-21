@@ -11,20 +11,4 @@ class ProductDao{
     private val _products = MutableStateFlow(sampleProducts)
     val products = _products.asStateFlow()
 
-    fun findByIdWithResponse(id: String): Product?{
-        val listProducts = products.value
-        val searchProduct = listProducts.find {
-                p ->
-                p.iD == id
-        }
-        return searchProduct
-    }
-    fun findById(id: String){
-        val listProducts = products.value
-        listProducts.find {
-            p ->
-            p.iD == id
-        }
-    }
-
 }
