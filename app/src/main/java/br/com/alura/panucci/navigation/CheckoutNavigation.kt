@@ -16,7 +16,9 @@ fun NavGraphBuilder.checkoutNavigation(navController: NavHostController) {
         val viewModel: CheckoutViewModel = viewModel()
         val uiState by viewModel.uiState.collectAsState()
         CheckoutScreen(uiState = uiState,
-            onOrderClick = { navController.popBackStack() /* OU navController.navigateUp()*/ })
+            onOrderClick = {
+                navController.currentBackStackEntry?.savedStateHandle?.set("order_done", "✅ Pedido realizado com sucesso")
+                navController.popBackStack() /* OU navController.navigateUp()*/ })
     }
 }
 
