@@ -5,6 +5,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 data class MoldeDeUIState(val texto: String = "", val listProducts: List<Product> = emptyList())
+//Como funciona: o dado do Composable que queremos segurar seu State criamos aqui no UiState e inicializamos com um valor inicial
+// Mudamos seu valor no ViewModel, conforme sendo necessario e util
+// Entao o Composable chama alguma funcao do ViewModel (e passa argumentos se necessario). Essa funcao estara apta a mudar o valor daquele dado
 
 class MoldeDeViewModel(stateHolder: MoldeDeUIState = MoldeDeUIState()): ViewModel() {
 
