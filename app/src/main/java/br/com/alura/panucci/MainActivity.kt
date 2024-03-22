@@ -88,6 +88,10 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
+                    fun removeSnackBarMessage(){
+                        currentBackStack?.savedStateHandle?.remove<String?>("order_done")
+                    }
+
                     var selectedItem by remember(currentDestination) {
                         val item = currentDestination?.let {
                             navDestination ->
@@ -140,6 +144,7 @@ class MainActivity : ComponentActivity() {
                         showFAB = showFAB(),
                         bottomAppBarItemSelected = selectedItem,
                         snackBarHostState = snackBarHostState,
+                        removeSnackBarMessage = { removeSnackBarMessage() },
                         onBottomAppBarItemSelectedChange = {
                             navItem ->
                             selectedItem = navItem
@@ -169,6 +174,7 @@ fun PanucciApp(
     showBottomBar: Boolean = false,
     showFAB: Boolean = false,
     snackBarHostState: SnackbarHostState = SnackbarHostState(),
+    removeSnackBarMessage: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -176,6 +182,7 @@ fun PanucciApp(
                        SnackbarHost(hostState = snackBarHostState){
                            Snackbar(modifier = Modifier.padding(all = 8.dp)) {
                                Text(text = it.visuals.message)
+                               removeSnackBarMessage()
                            }
                        }
         },
@@ -224,7 +231,7 @@ fun PanucciApp(
 private fun PanucciAppPreview() {
     PanucciTheme {
         Surface {
-            PanucciApp {}
+            //PanucciApp {}
         }
     }
 }
