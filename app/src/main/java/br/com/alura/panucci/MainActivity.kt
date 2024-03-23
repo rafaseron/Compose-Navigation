@@ -24,9 +24,9 @@ import br.com.alura.panucci.navigation.navigateToCheckout
 import br.com.alura.panucci.navigation.navigateToDrinks
 import br.com.alura.panucci.navigation.navigateToHighLightScreen
 import br.com.alura.panucci.navigation.navigateToMenu
-import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
+import br.com.alura.panucci.ui.components.listBottomAppBarItems
 import br.com.alura.panucci.ui.theme.PanucciTheme
 import kotlinx.coroutines.launch
 
@@ -88,12 +88,12 @@ class MainActivity : ComponentActivity() {
                     var selectedItem by remember(currentDestination) {
                         val item = currentDestination?.let {
                             navDestination ->
-                            bottomAppBarItems.find {
+                            listBottomAppBarItems.find {
                                 bottomBarItem ->
                                 bottomBarItem.destination == navDestination.route //TODO verificar se eese codigo nao deu merda
                             }
 
-                        } ?: bottomAppBarItems.first()
+                        } ?: listBottomAppBarItems.first()
 
                         mutableStateOf(item)
                     }
@@ -160,7 +160,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PanucciApp(
-    bottomAppBarItemSelected: BottomAppBarItem = bottomAppBarItems.first(),
+    bottomAppBarItemSelected: BottomAppBarItem = listBottomAppBarItems.first(),
     onBottomBarItemClick: (BottomAppBarItem) -> Unit = {},
     onFabClick: () -> Unit = {},
     showTopBar: Boolean = false,
@@ -193,7 +193,7 @@ fun PanucciApp(
             if (showBottomBar){
                 PanucciBottomAppBar(
                     receivedSelectedItem = bottomAppBarItemSelected,
-                    listItems = bottomAppBarItems,
+                    listItems = listBottomAppBarItems,
                     onItemClicked = onBottomBarItemClick,
                 )
             }
