@@ -53,13 +53,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            fun routeFlow(navItem: BottomAppBarItem, navController: NavController, productId: String = ""){
-                return when(navItem.label){
+            fun routeFlow(navItem: BottomAppBarItem, navController: NavController){
+                 when(navItem.destination){
                     highlightListRoute -> navController.navigateToHighLightScreen()
-                    checkoutRoute -> navController.navigateToCheckout()
                     menuRoute -> navController.navigateToMenu()
                     drinksRoute -> navController.navigateToDrinks()
-                    productDetailsRoute -> navController.navigateToDetails(productId = productId)
                     else -> navController.navigateToHighLightScreen()
                 }
             }
