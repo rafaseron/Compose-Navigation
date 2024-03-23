@@ -49,8 +49,8 @@ fun PanucciBottomAppBar(
     onItemClicked: (BottomAppBarItem) -> Unit = {}
 ) {
     NavigationBar(modifier) {
-        listItems.forEach {
-            item ->
+
+        for (item in listItems){
             NavigationBarItem(
                 icon = { Icon(item.icon, contentDescription = item.label) },
                 label = { Text(item.label) },
