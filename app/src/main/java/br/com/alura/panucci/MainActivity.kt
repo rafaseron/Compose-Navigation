@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity() {
                             navDestination ->
                             listBottomAppBarItems.find {
                                 bottomBarItem ->
-                                bottomBarItem.destination == navDestination.route //TODO verificar se eese codigo nao deu merda
+                                bottomBarItem.destination == navDestination.route
                             }
 
                         } ?: listBottomAppBarItems.first()
