@@ -74,12 +74,13 @@ class MainActivity : ComponentActivity() {
                     val snackBarHostState = remember { SnackbarHostState() }
 
                     val scope = rememberCoroutineScope()
-                        pedidoConcluido?.value?.let {
-                                message ->
-                            scope.launch {
-                                snackBarHostState.showSnackbar(message = message)
+
+                    pedidoConcluido?.value?.let {
+                        message ->
+                        scope.launch {
+                            snackBarHostState.showSnackbar(message = message)
                             }
-                        }
+                    }
 
                     fun removeSnackBarMessage(){
                         currentBackStack?.savedStateHandle?.remove<String?>("order_done")
