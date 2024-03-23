@@ -1,7 +1,6 @@
 package br.com.alura.panucci
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -18,21 +17,17 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.panucci.navigation.NavHostComposable
-import br.com.alura.panucci.navigation.checkoutRoute
 import br.com.alura.panucci.navigation.drinksRoute
 import br.com.alura.panucci.navigation.highlightListRoute
 import br.com.alura.panucci.navigation.menuRoute
 import br.com.alura.panucci.navigation.navigateToCheckout
-import br.com.alura.panucci.navigation.navigateToDetails
 import br.com.alura.panucci.navigation.navigateToDrinks
 import br.com.alura.panucci.navigation.navigateToHighLightScreen
 import br.com.alura.panucci.navigation.navigateToMenu
-import br.com.alura.panucci.navigation.productDetailsRoute
 import br.com.alura.panucci.sampledata.bottomAppBarItems
 import br.com.alura.panucci.ui.components.BottomAppBarItem
 import br.com.alura.panucci.ui.components.PanucciBottomAppBar
 import br.com.alura.panucci.ui.theme.PanucciTheme
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -143,7 +138,7 @@ class MainActivity : ComponentActivity() {
                         bottomAppBarItemSelected = selectedItem,
                         snackBarHostState = snackBarHostState,
                         removeSnackBarMessage = { removeSnackBarMessage() },
-                        onBottomAppBarItemSelectedChange = {
+                        onBottomBarItemClick = {
                             navItem ->
                             selectedItem = navItem
                             routeFlow(navItem, navController)
@@ -166,7 +161,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun PanucciApp(
     bottomAppBarItemSelected: BottomAppBarItem = bottomAppBarItems.first(),
-    onBottomAppBarItemSelectedChange: (BottomAppBarItem) -> Unit = {},
+    onBottomBarItemClick: (BottomAppBarItem) -> Unit = {},
     onFabClick: () -> Unit = {},
     showTopBar: Boolean = false,
     showBottomBar: Boolean = false,
@@ -197,9 +192,9 @@ fun PanucciApp(
         bottomBar = {
             if (showBottomBar){
                 PanucciBottomAppBar(
-                    item = bottomAppBarItemSelected,
-                    items = bottomAppBarItems,
-                    onItemChange = onBottomAppBarItemSelectedChange,
+                    receivedSelectedItem = bottomAppBarItemSelected,
+                    listItems = bottomAppBarItems,
+                    onItemClicked = onBottomBarItemClick,
                 )
             }
         },

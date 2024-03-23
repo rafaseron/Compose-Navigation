@@ -19,21 +19,20 @@ class BottomAppBarItem(
 
 @Composable
 fun PanucciBottomAppBar(
-    item: BottomAppBarItem,
+    receivedSelectedItem: BottomAppBarItem,
     modifier: Modifier = Modifier,
-    items: List<BottomAppBarItem> = emptyList(),
-    onItemChange: (BottomAppBarItem) -> Unit = {}
+    listItems: List<BottomAppBarItem> = emptyList(),
+    onItemClicked: (BottomAppBarItem) -> Unit = {}
 ) {
     NavigationBar(modifier) {
-        items.forEach {
-            val label = it.label
-            val icon = it.icon
+        listItems.forEach {
+            item ->
             NavigationBarItem(
-                icon = { Icon(icon, contentDescription = label) },
-                label = { Text(label) },
-                selected = item.label == label,
+                icon = { Icon(item.icon, contentDescription = item.label) },
+                label = { Text(item.label) },
+                selected = receivedSelectedItem.destination == item.destination,
                 onClick = {
-                    onItemChange(it)
+                    onItemClicked(item)
                 }
             )
         }
@@ -45,8 +44,8 @@ fun PanucciBottomAppBar(
 fun PanucciBottomAppBarPreview() {
     PanucciTheme {
         PanucciBottomAppBar(
-            item = bottomAppBarItems.first(),
-            items = bottomAppBarItems
+            receivedSelectedItem = bottomAppBarItems.first(),
+            listItems = bottomAppBarItems
         )
     }
 }
